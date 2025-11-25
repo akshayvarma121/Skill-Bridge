@@ -1,106 +1,93 @@
-# PMIO: A Voice-First Internship Portal for Rural India 🇮🇳
+Skill Bridge: Voice-First Internship Portal for Rural India
 
-PMIO is a full-stack web application designed to bridge the gap between rural youth and internship opportunities. Leveraging a voice-first, multilingual interface, it provides an accessible platform for users with limited digital literacy to register their profiles and receive personalized internship recommendations.
+Skill Bridge is a full-stack web application designed to connect rural youth to internship opportunities. With a voice-first, multilingual interface, it provides an accessible platform for users with limited digital literacy to register profiles and receive personalized internship recommendations.
 
+Core Features
+Voice-First Onboarding: Multi-step conversational UI enabling users to register their name, skills, education, and location entirely through voice commands.
 
+Multilingual Support: English, Hindi, and Tamil supported throughout the interface, including voice prompts and all UI text.
 
-## ✨ Core Features
+Personalized Recommendations: Backend engine matches user profiles (skills and location) to a curated database of internships, providing custom opportunity lists.
 
-* **🎤 Voice-First Onboarding:** A multi-step conversational UI that allows users to register their name, skills, education, and location entirely through voice commands.
-* **🌐 Multilingual Support:** Fully functional in English, Hindi, and Tamil, including voice prompts and UI text.
-* **🤖 Personalized Recommendations:** A backend engine that matches user profiles (skills and location) to a database of internships, providing a tailored list of opportunities.
-* **🛡️ Accessible Fallback:** A traditional form-based registration is available as a fallback, ensuring no user is left behind.
-* **📱 Mobile-First PWA:** Built as a Progressive Web App, it's installable on low-cost smartphones and designed for accessibility with large touch targets and high contrast.
+Accessible Fallback: Full traditional form-based registration available as fallback for accessibility.
 
----
+Mobile-First PWA: Progressive Web App installable on smartphones, featuring high accessibility, large touch targets, and high contrast for all users.
 
+Technology Stack
+Skill Bridge is built as a modern full-stack application with a React frontend and FastAPI backend.
 
-## 🛠️ Technology Stack
+Area	Technology
+Frontend	React, Vite, React Router, i18next, Axios
+Backend	Python, FastAPI, Uvicorn
+Database	MongoDB (for user profiles & internships)
+Cache	Redis (match scores & session management)
+Voice API	Web Speech API (react-speech-recognition)
+Snapshots
+See live screenshots and demos here:
+Google Drive Snapshots
 
-The project is a modern full-stack application composed of a React frontend and a FastAPI backend.
+Getting Started
+To set up the full project locally, you’ll need to configure both backend and frontend in separate terminals.
 
-| Area      | Technology                                    |
-| :-------- | :-------------------------------------------- |
-| **Frontend** | React, Vite, React Router, i18next, Axios     |
-| **Backend** | Python, FastAPI, Uvicorn                      |
-| **Database** | MongoDB (for user profiles & internships)     |
-| **Cache** | Redis (for match scores & session management) |
-| **Voice API** | Web Speech API (`react-speech-recognition`)   |
+Prerequisites
+Node.js (v18+) & npm
 
----
-## Snapshots:
-https://drive.google.com/drive/folders/1TZ9i1Nc9T3HrXNdiVkUrkLO_0kOgSmG9?usp=drive_link
+Python (v3.10+) & pip
 
-## 🚀 Getting Started
+MongoDB instance
 
-To get the full project running locally, you'll need to set up both the backend and the frontend in separate terminals.
+Redis instance
 
-### Prerequisites
+Backend Setup
+Navigate to the backend folder and create/activate a Python virtual environment:
 
-* Node.js (v18+) & npm
-* Python (v3.10+) & pip
-* A running MongoDB instance
-* A running Redis instance
+bash
+python -m venv venv
+.\venv\Scripts\activate # Windows
+source venv/bin/activate # macOS/Linux
+Install backend dependencies:
 
-### Step 1: Backend Setup ⚙️
+bash
+pip install -r requirements.txt
+Configure environment variables in backend/.env:
 
-1.  **Navigate to the `backend` folder** and create/activate a Python virtual environment:
-    ```bash
-    # Create virtual environment
-    python -m venv venv
-    # Activate on Windows
-    .\venv\Scripts\activate
-    # Activate on macOS/Linux
-    source venv/bin/activate
-    ```
+text
+MONGO_URI=mongodb://localhost:27017/skillbridge_db
+REDIS_HOST=your-redis-host.com
+REDIS_PORT=6379
+REDIS_PASSWORD=your-redis-password
+Run the backend server:
 
-2.  **Install backend dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+bash
+uvicorn main:app --reload
+The API will be live at http://127.0.0.1:8000.
 
-3.  **Configure Environment:** Create a `.env` file in the `backend` folder and add your database credentials:
-    ```
-    MONGO_URI=mongodb://localhost:27017/pmio_db
-    REDIS_HOST=your-redis-host.com
-    REDIS_PORT=12345
-    REDIS_PASSWORD=your-redis-password
-    ```
+Frontend Setup
+Open a new terminal and navigate to the frontend folder.
 
-4.  **Run the Backend Server:**
-    ```bash
-    uvicorn main:app --reload
-    ```
-    The API will be live at `http://127.0.0.1:8000`. Keep this terminal running.
+Install frontend dependencies:
 
-### Step 2: Frontend Setup 🌐
+bash
+npm install
+Configure environment variables in frontend/.env:
 
-1.  **Open a new terminal** and navigate to the `frontend` folder.
+text
+VITE_API_URL=http://127.0.0.1:8000
+Run the frontend app:
 
-2.  **Install frontend dependencies:**
-    ```bash
-    npm install
-    ```
+bash
+npm run dev
+The app will open at http://localhost:5173.
 
-3.  **Configure Environment:** Create a `.env` file in the `frontend` folder and point it to your running backend:
-    ```
-    VITE_API_URL=[http://127.0.0.1:8000](http://127.0.0.1:8000)
-    ```
+Future Scope
+Enhanced AI matching algorithms for internships.
 
-4.  **Run the Frontend App:**
-    ```bash
-    npm run dev
-    ```
-    The application will open in your browser at `http://localhost:5173`.
+Full offline capability leveraging PWA features.
 
----
+Real-time notifications for new high-match opportunities.
 
-## 🔮 Future Scope
+License
+This project is under the MIT License.
 
-* **Enhanced AI Model:** Integrate a more sophisticated machine learning model for calculating match scores.
-* **Offline Support:** Fully leverage PWA capabilities for offline browsing of saved recommendations.
-* **Real-time Notifications:** Add push notifications for new, high-match internship opportunities.
+For any questions or contributions, please open an issue or submit a pull request!
 
----
-
-This project was built late one night in Bhopal, Madhya Pradesh, as a part of SIH project 
