@@ -1,0 +1,10 @@
+{
+  "app_name": "PMIO",
+  "welcome_message": "स्किल ब्रिज के साथ अपनी परफेक्ट इंटर्नशिप खोजें",
+  "select_language": "कृपया अपनी भाषा चुनें",
+  "continue_button": "जारी रखें",
+  "loading_internships": "इंटर्नशिप लोड हो रही हैं...",
+  "error_fetching_internships": "इंटर्नशिप लाने में विफल। कृपया बाद में पुन: प्रयास करें।",
+  "internship_listings": "इंटर्नशिप की सूची",
+  "no_internships_found": "इस समय कोई इंटर्नशिप नहीं मिली।"
+}

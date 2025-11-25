@@ -1,0 +1,7 @@
+<svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="40" width="80" height="10" rx="5" fill="#0A3979"/>
+  <path d="M20 40 Q60 5 100 40" stroke="#FFD248" stroke-width="4" fill="none"/>
+  <polygon points="58,18 62,5 66,18" fill="#33B7E7"/>
+  <polygon points="92,22 96,9 100,22" fill="#FFD248"/>
+  <!-- You can tweak/control proportions/colors as desired -->
+</svg>

@@ -1,0 +1,11 @@
+{
+    "app_name": "PMIO",
+    "welcome_message": "Find your perfect internship with SKILL BRIDGE",
+    "select_language": "Please select your language",
+    "continue_button": "Continue",
+    "loading_internships": "Loading internships...",
+    "error_fetching_internships": "Failed to fetch internships. Please try again later.",
+    "internship_listings": "Internship Listings",
+    "no_internships_found": "No internships found at the moment.",
+    "loading_recommendations": "Loading recommendations..."
+}

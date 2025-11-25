@@ -1,0 +1,52 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circuit board pattern with tech nodes and connections -->
+  <g opacity="0.6" stroke="#197EC8" stroke-width="2" fill="none">
+    <!-- Horizontal lines -->
+    <line x1="50" y1="100" x2="350" y2="100" />
+    <line x1="450" y1="100" x2="750" y2="100" />
+    <line x1="100" y1="250" x2="400" y2="250" />
+    <line x1="500" y1="250" x2="700" y2="250" />
+    <line x1="50" y1="400" x2="300" y2="400" />
+    <line x1="400" y1="400" x2="750" y2="400" />
+    <line x1="150" y1="550" x2="450" y2="550" />
+    <line x1="550" y1="550" x2="700" y2="550" />
+    <line x1="100" y1="700" x2="700" y2="700" />
+    
+    <!-- Vertical lines -->
+    <line x1="150" y1="50" x2="150" y2="350" />
+    <line x1="300" y1="150" x2="300" y2="450" />
+    <line x1="450" y1="50" x2="450" y2="350" />
+    <line x1="600" y1="200" x2="600" y2="500" />
+    <line x1="200" y1="300" x2="200" y2="750" />
+    <line x1="500" y1="350" x2="500" y2="750" />
+    
+    <!-- Circuit nodes (circles) -->
+    <circle cx="150" cy="100" r="15" stroke-width="3" />
+    <circle cx="300" cy="250" r="18" stroke-width="3" />
+    <circle cx="450" cy="100" r="15" stroke-width="3" />
+    <circle cx="600" cy="400" r="20" stroke-width="3" />
+    <circle cx="200" cy="550" r="16" stroke-width="3" />
+    <circle cx="500" cy="700" r="18" stroke-width="3" />
+    <circle cx="350" cy="400" r="14" stroke-width="3" />
+    
+    <!-- Rectangles (chips/components) -->
+    <rect x="120" y="220" width="40" height="60" rx="5" stroke-width="2.5" />
+    <rect x="420" y="70" width="50" height="50" rx="5" stroke-width="2.5" />
+    <rect x="570" y="370" width="60" height="40" rx="5" stroke-width="2.5" />
+    <rect x="320" y="520" width="45" height="55" rx="5" stroke-width="2.5" />
+    <rect x="650" y="240" width="50" height="50" rx="5" stroke-width="2.5" />
+    
+    <!-- Diagonal connections -->
+    <line x1="150" y1="100" x2="300" y2="250" />
+    <line x1="450" y1="100" x2="600" y2="400" />
+    <line x1="300" y1="250" x2="350" y2="400" />
+    <line x1="350" y1="400" x2="500" y2="700" />
+  </g>
+  
+  <!-- Accent glow elements -->
+  <g opacity="0.4" stroke="#FFD248" stroke-width="2" fill="none">
+    <circle cx="400" cy="150" r="25" stroke-width="2" />
+    <circle cx="250" cy="450" r="22" stroke-width="2" />
+    <circle cx="550" cy="600" r="20" stroke-width="2" />
+  </g>
+</svg>
