@@ -1,9 +1,16 @@
-
+import os
+from dotenv import load_dotenv
 import redis.asyncio as redis
 
-REDIS_HOST = "redis-13668.c278.us-east-1-4.ec2.redns.redis-cloud.com"
-REDIS_PORT = 13668
-REDIS_PASSWORD = "vxq73c8N9vmoGhlknx56nTsqlMK3YyoY"
+load_dotenv(dotenv_path="C:/Users/varma/Desktop/skill bridge/backend/app/.env")
+
+REDIS_HOST = os.getenv("REDIS_HOST")
+REDIS_PORT = 17487      # Ensure this is always an int
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
+
+print("Redis Host:", REDIS_HOST)
+print("Redis Port:", REDIS_PORT)
+print("Redis Password:", REDIS_PASSWORD)
 
 redis_client: redis.Redis | None = None
 

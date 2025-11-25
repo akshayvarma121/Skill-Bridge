@@ -16,12 +16,12 @@ Mobile-First PWA: Progressive Web App installable on smartphones, featuring high
 Technology Stack
 Skill Bridge is built as a modern full-stack application with a React frontend and FastAPI backend.
 
-Area	Technology
-Frontend	React, Vite, React Router, i18next, Axios
-Backend	Python, FastAPI, Uvicorn
-Database	MongoDB (for user profiles & internships)
-Cache	Redis (match scores & session management)
-Voice API	Web Speech API (react-speech-recognition)
+Area --->	Technology
+Frontend--->React, Vite, React Router, i18next, Axios
+Backend---->Python, FastAPI, Uvicorn
+Database--->MongoDB (for user profiles & internships)
+Cache  ---->Redis (match scores & session management)
+Voice API--->Web Speech API (react-speech-recognition)
 Snapshots
 See live screenshots and demos here:
 Google Drive Snapshots
@@ -41,25 +41,26 @@ Redis instance
 Backend Setup
 Navigate to the backend folder and create/activate a Python virtual environment:
 
-bash
+
 python -m venv venv
+
 .\venv\Scripts\activate # Windows
+
 source venv/bin/activate # macOS/Linux
+
 Install backend dependencies:
 
-bash
 pip install -r requirements.txt
+
 Configure environment variables in backend/.env:
 
-text
 MONGO_URI=mongodb://localhost:27017/skillbridge_db
 REDIS_HOST=your-redis-host.com
 REDIS_PORT=6379
 REDIS_PASSWORD=your-redis-password
 Run the backend server:
 
-bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 The API will be live at http://127.0.0.1:8000.
 
 Frontend Setup
@@ -67,15 +68,15 @@ Open a new terminal and navigate to the frontend folder.
 
 Install frontend dependencies:
 
-bash
+
 npm install
 Configure environment variables in frontend/.env:
 
-text
+
 VITE_API_URL=http://127.0.0.1:8000
 Run the frontend app:
 
-bash
+
 npm run dev
 The app will open at http://localhost:5173.
 

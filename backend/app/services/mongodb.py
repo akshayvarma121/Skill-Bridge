@@ -1,13 +1,16 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
 
-MONGO_URL = "mongodb+srv://varmaakshay2020_db_user:ebDXgmPrauiu6gwZ@cluster0.actkxov.mongodb.net/ai_assistant?retryWrites=true&w=majority"
+load_dotenv(dotenv_path="C:/Users/varma/Desktop/skill bridge/backend/app/.env")
 
-_client = None
-_db = None
+
+MONGO_URI = os.getenv("MONGO_URI")
+print(MONGO_URI)
 
 async def connect_to_mongo():
     global _client, _db
-    _client = AsyncIOMotorClient(MONGO_URL)
+    _client = AsyncIOMotorClient(MONGO_URI)
     _db = _client["ai_assistant"]   # specify db name
     print("✅ Connected to MongoDB Atlas:", _db.name)
 

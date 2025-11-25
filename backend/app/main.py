@@ -9,7 +9,7 @@ from app.services.redis_client import connect_to_redis, close_redis_connection
 from app.api import voice
 
 
-app = FastAPI(title="PMIO AI Assistant")
+app = FastAPI(title="Skill Bridge AI Assistant")
 
 # --- CORS Settings ---
 # In production, replace "*" with your specific frontend domain.
