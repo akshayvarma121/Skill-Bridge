@@ -1,18 +1,45 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from contextlib import asynccontextmanager
+
 from app.services.mongodb import connect_to_mongo, close_mongo_connection
 from app.api.routes import router as api_router
 
-# The following imports are not used in this file but are good to have if you plan on adding them later
-from app.services.redis_client import connect_to_redis, close_redis_connection
-from app.api import voice
+# Optional Redis imports for future use
+# from app.services.redis_client import connect_to_redis, close_redis_connection
+# from app.api import voice
 
+# --- Pydantic Models ---
+class VoiceInputPayload(BaseModel):
+    text: str
+    language: str
 
-app = FastAPI(title="Skill Bridge AI Assistant")
+class UserProfile(BaseModel):
+    name: str
+    skills: list[str]
+    education: str
+    location: str
+
+# --- FastAPI Lifespan for Startup/Shutdown ---
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup actions
+    await connect_to_mongo()
+    # Uncomment if Redis is configured and used:
+    # await connect_to_redis()
+    yield
+    # Shutdown actions
+    await close_mongo_connection()
+    # Uncomment if Redis is configured and used:
+    # await close_redis_connection()
+
+app = FastAPI(
+    title="Skill Bridge AI Assistant",
+    lifespan=lifespan
+)
 
 # --- CORS Settings ---
-# In production, replace "*" with your specific frontend domain.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -24,28 +51,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- Pydantic Models ---
-# It's better to keep your models in the `app/models/` directory
-# but for this example, we'll keep them here to show the fix.
-class VoiceInputPayload(BaseModel):
-    text: str
-    language: str
-
-class UserProfile(BaseModel):
-    name: str
-    skills: list[str]
-    education: str
-    location: str
-
-# You don't need UserContext since UserProfile already covers it.
-# class UserContext(BaseModel):
-#     skills: list[str]
-#     location: str
-
-
-# --- Mount the API Router ---
-# This is the correct way to include all endpoints from routes.py
-# It makes the endpoints from `app/api/routes.py` available under a prefix (e.g., /api).
+# --- Include Routers ---
 app.include_router(api_router, prefix="/api")
 
 # --- API Endpoints ---
@@ -58,13 +64,4 @@ async def handle_voice_input(payload: VoiceInputPayload):
     print(f"Received voice input ({payload.language}): '{payload.text}'")
     return {"processedText": payload.text}
 
-# --- Startup and Shutdown Events ---
-@app.on_event("startup")
-async def startup_event():
-    await connect_to_mongo()
-    await connect_to_redis() # Uncomment if you use Redis
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    await close_mongo_connection()
-    await close_redis_connection() # Uncomment if you use Redis
+# Place this file at the entrypoint of your FastAPI backend (where your Render deployment expects).
