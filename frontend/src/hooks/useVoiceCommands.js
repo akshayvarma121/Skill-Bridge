@@ -6,17 +6,24 @@ export const useVoiceCommands = () => {
 
   const commands = [
     {
-      // Matches commands in English or Hindi
+      // Matches commands in English or Hindi for internships page
       command: ['Go to internships', 'इंटर्नशिप दिखाओ', 'इंटर्नशिप पर जाएं'],
-      callback: () => navigate('/internships'),
+      callback: (...args) => {
+        console.log("Voice command recognized: INTERNSHIPS", args);
+        navigate('/internships');
+      },
       matchInterim: true, // For faster response
     },
     {
+      // Matches "Go home" or Hindi equivalents for the home page
       command: ['Go home', 'वापस जाओ', 'होम पर जाएं'],
-      callback: () => navigate('/'),
+      callback: (...args) => {
+        console.log("Voice command recognized: HOME", args);
+        navigate('/');
+      },
       matchInterim: true,
     },
-    // Add more navigation commands here
+    // You can add more navigation commands here
   ];
 
   return { commands };
