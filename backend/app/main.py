@@ -1,14 +1,27 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
+import logging
+import traceback
 
 from app.services.mongodb import connect_to_mongo, close_mongo_connection
 from app.api.routes import router as api_router
-
 # Optional Redis imports for future use
 # from app.services.redis_client import connect_to_redis, close_redis_connection
 # from app.api import voice
+
+# ---- Logging / Debug Tracebacks ----
+logging.basicConfig(level=logging.DEBUG)
+
+@app.middleware("http")
+async def print_exceptions(request: Request, call_next):
+    try:
+        return await call_next(request)
+    except Exception as exc:
+        print("EXCEPTION CAUGHT IN MIDDLEWARE:")
+        traceback.print_exc()
+        raise exc
 
 # --- Pydantic Models ---
 class VoiceInputPayload(BaseModel):
@@ -46,7 +59,7 @@ app.add_middleware(
         "https://skill-bridge-qdozmjwa4-akshayvarma121s-projects.vercel.app",
         "https://skill-bridge-ten-dusky.vercel.app",
         "http://localhost:5173"
-    ],  # add your Vercel frontend URL here
+    ],  # Add your Vercel frontend URLs and localhost for dev
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -64,5 +77,3 @@ async def root():
 async def handle_voice_input(payload: VoiceInputPayload):
     print(f"Received voice input ({payload.language}): '{payload.text}'")
     return {"processedText": payload.text}
-
-# Place this file at the entrypoint of your FastAPI backend (where your Render deployment expects).
