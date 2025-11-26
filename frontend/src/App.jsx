@@ -8,9 +8,10 @@ import Header from './components/layouts/Header.jsx';
 import Footer from './components/layouts/Footer.jsx';
 import RegistrationForm from './components/RegistrationForm.jsx';
 import VoiceNavigator from './components/voice/VoiceNavigator.jsx';
+import MicTestButton from './MicTestButton'; // Import for mic permission test
 import './styles/global.css';
 
-// Create a new component to contain the application logic and conditional rendering
+// Application logic and conditional rendering
 function AppContent() {
   const location = useLocation(); // Get the current URL location
   const { t } = useTranslation();
@@ -27,14 +28,17 @@ function AppContent() {
         </Routes>
       </main>
       <Footer />
-      
-      {/* Only show the VoiceNavigator if we are NOT on the homepage */}
+
+      {/* Microphone Permission Test Button - REMOVE when production-ready */}
+      <MicTestButton />
+
+      {/* Only show VoiceNavigator if we are NOT on the homepage */}
       {location.pathname !== '/' && <VoiceNavigator />}
     </div>
   );
 }
 
-// Your main App component now just sets up the router
+// Main App component sets up the router
 function App() {
   return (
     <Router>
