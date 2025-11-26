@@ -7,13 +7,22 @@ import traceback
 
 from app.services.mongodb import connect_to_mongo, close_mongo_connection
 from app.api.routes import router as api_router
-# Optional Redis imports for future use
-# from app.services.redis_client import connect_to_redis, close_redis_connection
-# from app.api import voice
 
-# ---- Logging / Debug Tracebacks ----
 logging.basicConfig(level=logging.DEBUG)
 
+# --- FastAPI Lifespan for Startup/Shutdown ---
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await connect_to_mongo()
+    yield
+    await close_mongo_connection()
+
+app = FastAPI(
+    title="Skill Bridge AI Assistant",
+    lifespan=lifespan
+)
+
+# --- Add Error-Printing Middleware *after* app is created ---
 @app.middleware("http")
 async def print_exceptions(request: Request, call_next):
     try:
@@ -23,35 +32,6 @@ async def print_exceptions(request: Request, call_next):
         traceback.print_exc()
         raise exc
 
-# --- Pydantic Models ---
-class VoiceInputPayload(BaseModel):
-    text: str
-    language: str
-
-class UserProfile(BaseModel):
-    name: str
-    skills: list[str]
-    education: str
-    location: str
-
-# --- FastAPI Lifespan for Startup/Shutdown ---
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Startup actions
-    await connect_to_mongo()
-    # Uncomment if Redis is configured and used:
-    # await connect_to_redis()
-    yield
-    # Shutdown actions
-    await close_mongo_connection()
-    # Uncomment if Redis is configured and used:
-    # await close_redis_connection()
-
-app = FastAPI(
-    title="Skill Bridge AI Assistant",
-    lifespan=lifespan
-)
-
 # --- CORS Settings ---
 app.add_middleware(
     CORSMiddleware,
@@ -59,7 +39,7 @@ app.add_middleware(
         "https://skill-bridge-qdozmjwa4-akshayvarma121s-projects.vercel.app",
         "https://skill-bridge-ten-dusky.vercel.app",
         "http://localhost:5173"
-    ],  # Add your Vercel frontend URLs and localhost for dev
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -69,6 +49,10 @@ app.add_middleware(
 app.include_router(api_router, prefix="/api")
 
 # --- API Endpoints ---
+class VoiceInputPayload(BaseModel):
+    text: str
+    language: str
+
 @app.get("/")
 async def root():
     return {"message": "SkillBridge assistant is running!"}
